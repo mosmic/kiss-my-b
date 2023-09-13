@@ -65,15 +65,17 @@ export const getFilteredNewsSources = createSelector(
     let filteredArray = sources;
 
     if (searchTerm) {
-      filteredArray = sources.filter((source) =>
+      filteredArray = filteredArray.filter((source) =>
         source.name.toLocaleLowerCase().includes(searchTerm)
       );
     }
+
     if (currentCategory) {
-      filteredArray = sources.filter(
+      filteredArray = filteredArray.filter(
         (source) => source.category === currentCategory
       );
     }
+
     return filteredArray;
   }
 );
