@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import * as fromComponents from './components';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [...fromComponents.components],
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     EffectsModule.forFeature(effects),
     MatPaginatorModule,
     FormsModule,
+    MatInputModule,
   ],
   exports: [fromComponents.NewsSourcesComponent],
 })

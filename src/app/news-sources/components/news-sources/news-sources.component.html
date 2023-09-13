@@ -1,4 +1,12 @@
 <div id="news-sources-container">
+  <div id="search-field-container">
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchTermChange($event)"
+    />
+  </div>
   <div class="items-container">
     <div
       class="list-item-container"

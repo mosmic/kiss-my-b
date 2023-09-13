@@ -23,11 +23,8 @@ export class NewsSourcesComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(fromStore.loadNewsSources());
     this.sources$ = this.store.select(fromStore.getNewsSources);
-
     this.paginatedSources$ = this.store.select(fromStore.getNewsSourcesPage);
-
     this.itemsPerPage$ = this.store.select(fromStore.getItemsPerPage);
-
     this.currentPage$ = this.store.select(fromStore.getCurrentPage);
   }
 
@@ -35,5 +32,9 @@ export class NewsSourcesComponent implements OnInit {
     this.store.dispatch(
       fromStore.setCurrentPage({ currentPage: event.pageIndex })
     );
+  }
+
+  onSearchTermChange(searchTerm: string) {
+    this.store.dispatch(fromStore.setSearchTerm({ searchTerm }));
   }
 }

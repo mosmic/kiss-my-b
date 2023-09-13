@@ -14,7 +14,7 @@ export interface NewsSourcesResponse {
   providedIn: 'root',
 })
 export class NewsSourcesService {
-  private newsSourcesUrl = `https://newsapi.org/v2/top-headlines/sources?apiKey=${API_KEY}`;
+  private newsSourcesUrl = `https://newsapi.org/v2/top-headlines/sources?language=en&apiKey=${API_KEY}`;
   constructor(private http: HttpClient) {}
 
   getNewsSources(): Observable<NewsSourcesResponse> {

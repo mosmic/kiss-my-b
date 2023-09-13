@@ -42,19 +42,42 @@ export const getCurrentPage = createSelector(
   fromNewsSources.getCurrentPage
 );
 
+export const getSearchTerm = createSelector(
+  getNewsSourcesState,
+  fromNewsSources.getSearchTerm
+);
+
+export const getFilteredNewsSources = createSelector(
+  getNewsSources,
+  getSearchTerm,
+  (sources, searchTerm) => {
+    if (!searchTerm) {
+      return sources;
+    }
+    const filteredArray = sources.filter((source) => {
+      console.log(searchTerm);
+      return source.name.toLocaleLowerCase().includes(searchTerm);
+    });
+
+    return filteredArray;
+  }
+);
+
 export const getItemsPerPage = createSelector(
   getNewsSourcesState,
   fromNewsSources.getItemsPerPage
 );
 
 export const getNewsSourcesPage = createSelector(
-  getNewsSources,
+  getFilteredNewsSources,
   getCurrentPage,
   getItemsPerPage,
   (sources, page, itemsPerPage) => {
     if (!sources || page == undefined || !itemsPerPage) {
       return [];
     }
+
+    console.log(sources);
 
     let offset = (page - 1) * itemsPerPage;
 

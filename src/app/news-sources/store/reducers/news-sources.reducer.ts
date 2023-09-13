@@ -9,6 +9,7 @@ export interface NewsSourcesState {
   readonly itemsPerPage: number;
   readonly currentPage: number;
   readonly totalPages: number | null;
+  readonly searchTerm: string | null;
 }
 
 export const initialState: NewsSourcesState = {
@@ -18,6 +19,7 @@ export const initialState: NewsSourcesState = {
   itemsPerPage: 6,
   currentPage: 0,
   totalPages: null,
+  searchTerm: null,
 };
 
 const newsSourcesReducer = createReducer(
@@ -42,6 +44,10 @@ const newsSourcesReducer = createReducer(
   on(fromNewsSources.setCurrentPage, (state, { currentPage }) => ({
     ...state,
     currentPage,
+  })),
+  on(fromNewsSources.setSearchTerm, (state, { searchTerm }) => ({
+    ...state,
+    searchTerm,
   }))
 );
 
@@ -56,3 +62,4 @@ export const getNewsSourcesLoaded = (state: NewsSourcesState) =>
   state.newsSourcesLoaded;
 export const getCurrentPage = (state: NewsSourcesState) => state.currentPage;
 export const getItemsPerPage = (state: NewsSourcesState) => state.itemsPerPage;
+export const getSearchTerm = (state: NewsSourcesState) => state.searchTerm;

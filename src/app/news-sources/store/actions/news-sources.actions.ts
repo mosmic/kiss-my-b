@@ -17,3 +17,8 @@ export const setCurrentPage = createAction(
   '[News Sources] Set Current Page',
   props<{ currentPage: number }>()
 );
+
+export const setSearchTerm = createAction(
+  '[News Sources] Set Search Term',
+  props<{ searchTerm: string }>()
+);
