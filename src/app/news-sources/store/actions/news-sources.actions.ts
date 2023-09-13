@@ -12,3 +12,8 @@ export const loadNewsSourcesSuccess = createAction(
   '[News Sources] Load News Sources Success',
   props<{ sources: NewsSource[] }>()
 );
+
+export const setCurrentPage = createAction(
+  '[News Sources] Set Current Page',
+  props<{ currentPage: number }>()
+);

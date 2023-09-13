@@ -3,7 +3,7 @@ import { NewsSource } from '../../models/news-source.model';
 import * as fromNewsSources from '../actions/news-sources.actions';
 
 export interface NewsSourcesState {
-  readonly newsSources: NewsSource[] | null;
+  readonly newsSources: NewsSource[];
   readonly newsSourcesLoading: boolean;
   readonly newsSourcesLoaded: boolean;
   readonly itemsPerPage: number;
@@ -12,7 +12,7 @@ export interface NewsSourcesState {
 }
 
 export const initialState: NewsSourcesState = {
-  newsSources: null,
+  newsSources: [],
   newsSourcesLoading: false,
   newsSourcesLoaded: false,
   itemsPerPage: 6,
@@ -38,6 +38,10 @@ const newsSourcesReducer = createReducer(
     totalPages: Math.ceil(sources.length / state.itemsPerPage),
     newsSourcesLoading: false,
     newsSourcesLoaded: true,
+  })),
+  on(fromNewsSources.setCurrentPage, (state, { currentPage }) => ({
+    ...state,
+    currentPage,
   }))
 );
 

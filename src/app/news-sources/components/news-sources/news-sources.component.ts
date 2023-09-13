@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NewsSourcesService } from '../../services/news-sources.service';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../store';
+import { Observable } from 'rxjs';
+import { NewsSource } from '../../models/news-source.model';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-news-sources',
@@ -9,16 +12,28 @@ import * as fromStore from '../../store';
   styleUrls: ['./news-sources.component.scss'],
 })
 export class NewsSourcesComponent implements OnInit {
+  sources$: Observable<NewsSource[]>;
+  itemsPerPage$: Observable<number>;
+  currentPage$: Observable<number>;
+
   constructor(private store: Store<fromStore.NewsSourcesFeatureState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(fromStore.loadNewsSources());
-    this.store
-      .select(fromStore.getNewsSources)
-      .subscribe((data) => console.log(data));
+    this.sources$ = this.store.select(fromStore.getNewsSources);
 
     this.store
       .select(fromStore.getNewsSourcesPage)
       .subscribe((data) => console.log(data));
+
+    this.itemsPerPage$ = this.store.select(fromStore.getItemsPerPage);
+
+    this.currentPage$ = this.store.select(fromStore.getCurrentPage);
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.store.dispatch(
+      fromStore.setCurrentPage({ currentPage: event.pageIndex })
+    );
   }
 }
