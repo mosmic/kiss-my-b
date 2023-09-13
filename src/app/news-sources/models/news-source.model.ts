@@ -1,9 +1,9 @@
 export interface NewsSource {
-  id: string;
-  name: string;
-  description: string;
-  url: string;
-  category: string;
-  language: string;
-  country: string;
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly url: string;
+  readonly category: string;
+  readonly language: string;
+  readonly country: string;
 }

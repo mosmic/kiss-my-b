@@ -13,8 +13,10 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class NewsSourcesComponent implements OnInit {
   sources$: Observable<NewsSource[]>;
+  paginatedSources$: Observable<NewsSource[]>;
   itemsPerPage$: Observable<number>;
   currentPage$: Observable<number>;
+  searchTerm: string;
 
   constructor(private store: Store<fromStore.NewsSourcesFeatureState>) {}
 
@@ -22,9 +24,7 @@ export class NewsSourcesComponent implements OnInit {
     this.store.dispatch(fromStore.loadNewsSources());
     this.sources$ = this.store.select(fromStore.getNewsSources);
 
-    this.store
-      .select(fromStore.getNewsSourcesPage)
-      .subscribe((data) => console.log(data));
+    this.paginatedSources$ = this.store.select(fromStore.getNewsSourcesPage);
 
     this.itemsPerPage$ = this.store.select(fromStore.getItemsPerPage);
 

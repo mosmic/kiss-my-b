@@ -1,12 +1,22 @@
-<p>news-sources works!</p>
-<mat-paginator
-  #paginator
-  class="demo-paginator"
-  (page)="handlePageEvent($event)"
-  [length]="(sources$ | async)!.length"
-  [pageSize]="itemsPerPage$ | async"
-  [showFirstLastButtons]="false"
-  [pageIndex]="currentPage$ | async"
-  aria-label="Select page"
->
-</mat-paginator>
+<div id="news-sources-container">
+  <div class="items-container">
+    <div
+      class="list-item-container"
+      *ngFor="let source of paginatedSources$ | async"
+    >
+      <app-news-source-item [newsSource]="source"></app-news-source-item>
+    </div>
+  </div>
+
+  <mat-paginator
+    #paginator
+    class="demo-paginator"
+    (page)="handlePageEvent($event)"
+    [length]="(sources$ | async)!.length"
+    [pageSize]="itemsPerPage$ | async"
+    [showFirstLastButtons]="false"
+    [pageIndex]="currentPage$ | async"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

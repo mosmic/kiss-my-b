@@ -53,7 +53,7 @@ export const getNewsSourcesPage = createSelector(
   getItemsPerPage,
   (sources, page, itemsPerPage) => {
     if (!sources || page == undefined || !itemsPerPage) {
-      return;
+      return [];
     }
 
     let offset = (page - 1) * itemsPerPage;
