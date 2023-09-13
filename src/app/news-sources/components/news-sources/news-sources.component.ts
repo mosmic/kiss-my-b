@@ -46,7 +46,6 @@ export class NewsSourcesComponent implements OnInit {
   }
 
   onCategoryChange() {
-    console.log(this.currentCategory);
     this.store.dispatch(
       fromStore.setCurrentCategory({ category: this.currentCategory! })
     );
