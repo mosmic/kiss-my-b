@@ -8,6 +8,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import * as fromComponents from './components';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [...fromComponents.components],
@@ -19,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     FormsModule,
     MatInputModule,
+    MatSelectModule,
   ],
   exports: [fromComponents.NewsSourcesComponent],
 })

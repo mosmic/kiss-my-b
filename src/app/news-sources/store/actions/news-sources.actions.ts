@@ -22,3 +22,8 @@ export const setSearchTerm = createAction(
   '[News Sources] Set Search Term',
   props<{ searchTerm: string }>()
 );
+
+export const setCurrentCategory = createAction(
+  '[News Sources] Set Current Category',
+  props<{ category: string | null }>()
+);

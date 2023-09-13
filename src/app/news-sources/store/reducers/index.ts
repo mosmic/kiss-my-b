@@ -47,18 +47,33 @@ export const getSearchTerm = createSelector(
   fromNewsSources.getSearchTerm
 );
 
+export const getCategories = createSelector(
+  getNewsSourcesState,
+  fromNewsSources.getCategories
+);
+
+export const getCurrentCategory = createSelector(
+  getNewsSourcesState,
+  fromNewsSources.getCurrentCategory
+);
+
 export const getFilteredNewsSources = createSelector(
   getNewsSources,
   getSearchTerm,
-  (sources, searchTerm) => {
-    if (!searchTerm) {
-      return sources;
-    }
-    const filteredArray = sources.filter((source) => {
-      console.log(searchTerm);
-      return source.name.toLocaleLowerCase().includes(searchTerm);
-    });
+  getCurrentCategory,
+  (sources, searchTerm, currentCategory) => {
+    let filteredArray = sources;
 
+    if (searchTerm) {
+      filteredArray = sources.filter((source) =>
+        source.name.toLocaleLowerCase().includes(searchTerm)
+      );
+    }
+    if (currentCategory) {
+      filteredArray = sources.filter(
+        (source) => source.category === currentCategory
+      );
+    }
     return filteredArray;
   }
 );
@@ -76,8 +91,6 @@ export const getNewsSourcesPage = createSelector(
     if (!sources || page == undefined || !itemsPerPage) {
       return [];
     }
-
-    console.log(sources);
 
     let offset = (page - 1) * itemsPerPage;
 

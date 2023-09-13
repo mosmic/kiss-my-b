@@ -7,6 +7,26 @@
       (ngModelChange)="onSearchTermChange($event)"
     />
   </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Select an Category</mat-label>
+      <mat-select
+        [(value)]="currentCategory"
+        (selectionChange)="onCategoryChange()"
+      >
+        <mat-option
+          *ngFor="let category of categories$ | async"
+          [value]="category"
+        >
+          {{ category }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button (click)="clearFilters()">Clear filters</button>
+  </div>
   <div class="items-container">
     <div
       class="list-item-container"

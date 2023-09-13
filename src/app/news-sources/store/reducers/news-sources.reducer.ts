@@ -10,6 +10,8 @@ export interface NewsSourcesState {
   readonly currentPage: number;
   readonly totalPages: number | null;
   readonly searchTerm: string | null;
+  readonly categories: string[];
+  readonly currentCategory: string | null;
 }
 
 export const initialState: NewsSourcesState = {
@@ -20,6 +22,8 @@ export const initialState: NewsSourcesState = {
   currentPage: 0,
   totalPages: null,
   searchTerm: null,
+  categories: [],
+  currentCategory: null,
 };
 
 const newsSourcesReducer = createReducer(
@@ -38,6 +42,7 @@ const newsSourcesReducer = createReducer(
     ...state,
     newsSources: sources,
     totalPages: Math.ceil(sources.length / state.itemsPerPage),
+    categories: [...new Set(sources.map((item) => item.category))],
     newsSourcesLoading: false,
     newsSourcesLoaded: true,
   })),
@@ -48,6 +53,10 @@ const newsSourcesReducer = createReducer(
   on(fromNewsSources.setSearchTerm, (state, { searchTerm }) => ({
     ...state,
     searchTerm,
+  })),
+  on(fromNewsSources.setCurrentCategory, (state, { category }) => ({
+    ...state,
+    currentCategory: category,
   }))
 );
 
@@ -63,3 +72,6 @@ export const getNewsSourcesLoaded = (state: NewsSourcesState) =>
 export const getCurrentPage = (state: NewsSourcesState) => state.currentPage;
 export const getItemsPerPage = (state: NewsSourcesState) => state.itemsPerPage;
 export const getSearchTerm = (state: NewsSourcesState) => state.searchTerm;
+export const getCategories = (state: NewsSourcesState) => state.categories;
+export const getCurrentCategory = (state: NewsSourcesState) =>
+  state.currentCategory;
