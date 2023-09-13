@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsSourcesService } from '../../services/news-sources.service';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../../store';
 
 @Component({
   selector: 'app-news-sources',
@@ -7,11 +9,15 @@ import { NewsSourcesService } from '../../services/news-sources.service';
   styleUrls: ['./news-sources.component.scss'],
 })
 export class NewsSourcesComponent implements OnInit {
-  constructor(private newsSourcesService: NewsSourcesService) {}
+  constructor(private store: Store<fromStore.NewsSourcesFeatureState>) {}
 
   ngOnInit(): void {
-    this.newsSourcesService
-      .getNewsSources()
+    this.store.dispatch(fromStore.loadNewsSources());
+    this.store
+      .select(fromStore.getNewsSources)
       .subscribe((data) => console.log(data));
+    // this.newsSourcesService
+    //   .getNewsSources()
+    //   .subscribe((data) => console.log(data));
   }
 }
