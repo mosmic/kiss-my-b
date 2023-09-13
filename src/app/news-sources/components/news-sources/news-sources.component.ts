@@ -16,8 +16,9 @@ export class NewsSourcesComponent implements OnInit {
     this.store
       .select(fromStore.getNewsSources)
       .subscribe((data) => console.log(data));
-    // this.newsSourcesService
-    //   .getNewsSources()
-    //   .subscribe((data) => console.log(data));
+
+    this.store
+      .select(fromStore.getNewsSourcesPage)
+      .subscribe((data) => console.log(data));
   }
 }
